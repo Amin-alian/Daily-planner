@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: daily-planner-api
+
+  # Database Configuration (PostgreSQL Example)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/planner_db
+    username: postgres
+    password: Amin@1385
+    driver-class-name: org.postgresql.Driver
+
+  # JPA & Hibernate Configuration
+  jpa:
+    # 'update' automatically creates/updates your tables based on your Java Entities
+    hibernate:
+      ddl-auto: update
+
+    # Shows the SQL being executed in your console (Great for debugging)
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Server Configuration
+server:
+  port: 8080 # The default Spring Boot port
+
+# Custom JWT Configuration (For Phase 6 Security)
+jwt:
+  # This should be a long, secure, Base64 encoded secret in production!
+  secret: aVeryLongSecretKeyThatShouldBeAtLeast256BitsLongForJWTtoWorkProperly123!
+  # Expiration time in milliseconds (e.g., 86400000 = 24 hours)
+  expiration: 86400000
+
+# Logging (Optional but helpful)
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
