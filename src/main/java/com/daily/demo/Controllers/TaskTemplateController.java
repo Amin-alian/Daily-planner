@@ -35,4 +35,23 @@ public class TaskTemplateController {
         List<TaskTemplate> tasks = templateService.getAllActiveTaskTemplates(user.getId());
         return ResponseEntity.ok(ApiResponse.success(tasks, "Active tasks retrieved"));
     }
+
+    @PutMapping("/{taskId}")
+    public ResponseEntity<ApiResponse<TaskTemplate>> updateTask(
+            @PathVariable Long taskId,
+            @Valid @RequestBody TaskRequestDTO request,
+            @AuthenticationPrincipal User user) {
+
+        TaskTemplate updatedTask = templateService.updateTaskTemplate(taskId, request, user.getId());
+        return ResponseEntity.ok(ApiResponse.success(updatedTask, "Task updated successfully"));
+    }
+
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<ApiResponse<Void>> deleteTask(
+            @PathVariable Long taskId,
+            @AuthenticationPrincipal User user) {
+
+        templateService.deleteTaskTemplate(taskId, user.getId());
+        return ResponseEntity.ok(ApiResponse.success(null, "Task deleted successfully"));
+    }
 }

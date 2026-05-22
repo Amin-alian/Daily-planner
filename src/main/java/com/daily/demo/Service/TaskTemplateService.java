@@ -31,4 +31,21 @@ public class TaskTemplateService {
         User user = userRepository.findById(userId).orElseThrow();
         return taskTemplateRepository.findAllByUserIdAndIsActiveTrue(user.getId());
     }
+
+    public TaskTemplate updateTaskTemplate(Long taskId, TaskRequestDTO request, Long userId) {
+        TaskTemplate taskTemplate = taskTemplateRepository.findByIdAndUserIdAndIsActiveTrue(taskId, userId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        taskTemplate.setTitle(request.getTitle());
+        taskTemplate.setCategory(request.getCategory());
+        return taskTemplateRepository.save(taskTemplate);
+    }
+
+    public void deleteTaskTemplate(Long taskId, Long userId) {
+        TaskTemplate taskTemplate = taskTemplateRepository.findByIdAndUserIdAndIsActiveTrue(taskId, userId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        taskTemplate.setActive(false);
+        taskTemplateRepository.save(taskTemplate);
+    }
 }
