@@ -125,6 +125,27 @@ The API will start on **http://localhost:8080**
 
 ---
 
+## 💻 Frontend (React + TypeScript)
+
+A modern frontend is available in the `frontend/` folder.
+
+### Run Frontend
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Frontend runs on **http://localhost:5173** and connects to the backend using:
+
+```
+VITE_API_BASE_URL=http://localhost:8080/api
+```
+
+---
+
 ## 📡 API Endpoints
 
 All responses follow a consistent format:
